@@ -178,6 +178,7 @@ notebooks/
 results/
   figures/
   tables/
+```
 
 ## Reference
 
