@@ -16,9 +16,9 @@ control long-horizon error?
 
 Next-Latent Prediction trains a latent transition operator
 
-\[
-\hat h_{t+1} = F_\psi(h_t, x_{t+1})
-\]
+$$
+\hat{h}_{t+1} = F_{\psi}\left(h_t, x_{t+1}\right)
+$$
 
 to predict the next hidden state from the current state and the next
 observed token.
@@ -26,9 +26,9 @@ observed token.
 Under approximate transitions, recursive prediction may accumulate
 error:
 
-\[
-e_{k+1} \leq \rho e_k + \epsilon_h.
-\]
+$$
+e_{k+1} \leq \rho e_k + \epsilon_h
+$$
 
 This project empirically investigates that accumulation and evaluates
 two error-control mechanisms:
@@ -60,32 +60,34 @@ transition error to be studied separately from token-sampling error.
 
 The predicted future state is kept equal to the initial state:
 
-\[
+$$
 \hat h_{t+k} = h_t.
-\]
+$$
 
 ### One-step transition
 
 A residual MLP is trained using one-step Smooth L1 supervision:
 
-\[
-\hat h_{t+1}
+$$
+\hat{h}_{t+1}
 =
-h_t + f_\psi(\operatorname{LN}[h_t;E(x_{t+1})]).
-\]
+h_t + f_{\psi}\left(
+\operatorname{LN}\left[h_t; E\left(x_{t+1}\right)\right]
+\right)
+$$
 
 ### Multi-step transition
 
 The one-step model is fine-tuned using an eight-step recursive loss:
 
-\[
+$$
 L_{\mathrm{roll}}
 =
 \frac{1}{8}
 \sum_{k=1}^{8}
 \operatorname{SmoothL1}
-(\hat h_{t+k},h_{t+k}).
-\]
+\left(\hat{h}_{t+k}, h_{t+k}\right)
+$$
 
 ## Main results
 
