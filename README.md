@@ -69,11 +69,7 @@ $$
 A residual MLP is trained using one-step Smooth L1 supervision:
 
 ```math
-\hat{h}_{t+1}
-=
-h_t + f_{\psi}\left(
-\operatorname{LN}\left[h_t; E\left(x_{t+1}\right)\right]
-\right)
+\hat{h}_{t+1} = h_t + f_{\psi}\left(\operatorname{LN}\left[h_t; E\left(x_{t+1}\right)\right]\right)
 ```
 
 ### Multi-step transition
@@ -81,12 +77,7 @@ h_t + f_{\psi}\left(
 The one-step model is fine-tuned using an eight-step recursive loss:
 
 ```math
-L_{\mathrm{roll}}
-=
-\frac{1}{8}
-\sum_{k=1}^{8}
-\operatorname{SmoothL1}
-\left(\hat{h}_{t+k}, h_{t+k}\right)
+L_{\mathrm{roll}} = \frac{1}{8}\sum_{k=1}^{8}\operatorname{SmoothL1}\left(\hat{h}_{t+k}, h_{t+k}\right)
 ```
 
 ## Main results
