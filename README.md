@@ -491,6 +491,62 @@ acceptance and real runtime cost jointly. Future work should evaluate this
 hypothesis using a stronger speculator, a larger target model, and a
 production-oriented inference runtime.
 
+## Research V3: Multi-horizon NextLat training
+
+We reproduced the official NextLat training setup on TinyStories and
+compared two matched models trained with latent-prediction horizons
+of 1 and 8. Both models used the same architecture, seed, optimizer,
+81.92 million training tokens, and NVIDIA L4 environment.
+
+### Main result
+
+## Training-horizon trade-off
+
+The training horizon creates a measurable short-versus-long-horizon
+trade-off:
+
+- Training horizon and deployment horizon are not interchangeable.
+- At deployment horizon 1, H8 training significantly worsens decoder
+  output KL and teacher top-1 agreement.
+- The functional comparison reverses between deployment horizons 1 and 2.
+- From deployment horizons 2 through 32, H8 training significantly
+  improves output KL and teacher top-1 agreement.
+- At deployment horizon 8, H8 training reduces output KL by **51.20%**
+  relative to H1 training.
+- At deployment horizon 32, H8 training reduces output KL by **66.28%**
+  relative to H1 training.
+- H8 training slightly improves one-step normalized L2 while
+  substantially worsening one-step decoder KL. This confirms that
+  latent distance alone does not determine functional output quality.
+
+These results show that a training horizon should be evaluated against
+the intended deployment horizon. H8 training is disadvantageous for
+one-step deployment but substantially improves functional prediction
+over longer recursive rollouts.
+
+The current comparison uses seed 42. Cross-seed validation is required
+before making a general claim about the optimal training horizon.
+
+![H1 versus H8 crossover](results_v3/figures/nextlat_h1_vs_h8_crossover_seed42.png)
+
+
+### Interpretation
+
+These results suggest that training and deployment horizons should be
+selected jointly. Optimizing longer recursive rollouts can trade away
+one-step decoder fidelity while substantially improving long-horizon
+functional stability. The one-step latent L2 and decoder-space metrics
+also move in different directions, so latent distance alone is not a
+sufficient proxy for functional rollout quality.
+
+### Limitations
+
+This is a single-seed, small-model validation result on TinyStories.
+The dataset provides no independent test split in the official data
+module. The rollout is conditioned on true future token embeddings,
+and no end-to-end speculative decoding speedup is claimed.
+"""
+
 ## Reference
 
 This project is inspired by the following work:
