@@ -1,0 +1,84 @@
+{
+  "notebook": "24_h1_h8_acceptance_transfer.ipynb",
+  "official_nextlat_commit": "3770be6009cea2b3c455a9ce7f2ca88b504bb955",
+  "training_seed": 42,
+  "models": {
+    "h1_checkpoint": "/content/drive/MyDrive/ma2288_nextlat/research_v3/checkpoints/nextlat_pilot_5000_seed42/NextLat_Scaled_5000Step_Seed42-seed42/ckpt_iter_5000_2.0028.pt",
+    "h8_checkpoint": "/content/drive/MyDrive/ma2288_nextlat/research_v3/checkpoints/nextlat_h8_pilot_5000_seed42/NextLat_H8_5000Step_Seed42-seed42/ckpt_iter_5000_2.3431.pt",
+    "training_steps_each": 5000,
+    "training_horizons": [
+      1,
+      8
+    ]
+  },
+  "protocol": {
+    "autonomous_drafting": true,
+    "lossless_rejection_correction": true,
+    "exact_length_correction": true,
+    "temperature": 1.0,
+    "top_k": null,
+    "top_p": null,
+    "draft_horizons": [
+      2,
+      4,
+      8
+    ],
+    "prompt_length": 32,
+    "new_tokens_per_decode": 32,
+    "prompts_per_domain": 128,
+    "trials_per_prompt": 4,
+    "total_decodes": 6144,
+    "tiny_stories_eos_tokens_in_prefixes": 11
+  },
+  "statistics": {
+    "bootstrap_repetitions": 5000,
+    "tiny_stories_cluster_unit": "packed validation prompt",
+    "wikitext_cluster_unit": "source document",
+    "tiny_stories_clusters": 128,
+    "wikitext_clusters": 60,
+    "confidence_level": 0.95,
+    "multiple_comparison_correction": null,
+    "scope": "Evaluation prompt/document variation conditional on training seed 42"
+  },
+  "main_results": {
+    "tiny_stories_gamma8": {
+      "h1_emitted_tokens_per_round": 3.7372262773722627,
+      "h8_emitted_tokens_per_round": 3.855966109672864,
+      "relative_gain_percent": 3.177218168980938,
+      "relative_round_reduction_percent": 3.079379562043796,
+      "decision": "stable H8 efficiency gain"
+    },
+    "wikitext_gamma8": {
+      "h1_emitted_tokens_per_round": 3.551701712551485,
+      "h8_emitted_tokens_per_round": 3.5977162933684674,
+      "relative_gain_percent": 1.2955643390426044,
+      "relative_round_reduction_percent": 1.2789941469759376,
+      "decision": "inconclusive"
+    }
+  },
+  "scientific_conclusion": "Multi-horizon H8 training does not uniformly improve autonomous speculative acceptance. It is significantly worse at gamma 2 and 4, but produces a stable in-domain acceptance and verification-efficiency gain at gamma 8. The gamma-8 OOD point estimate is positive but its document-cluster confidence interval crosses zero.",
+  "mechanistic_interpretation": "H8 weakens early-position acceptance but improves deeper conditional acceptance. Because speculative decoding stops at the first rejection, the deeper advantage becomes useful only when the deployment draft window is sufficiently long.",
+  "industrial_interpretation": "At gamma 8, H8 reduces target verification rounds by approximately 3 percent on TinyStories. This is a necessary but insufficient condition for wall-clock speedup because an eight-token verification pass and sequential latent drafting have nonzero hardware cost.",
+  "limitations": [
+    "single training seed",
+    "small four-layer model",
+    "only four stochastic trials per prompt",
+    "TinyStories packed prompts lack source-document identifiers",
+    "no multiple-comparison correction",
+    "official implementation recomputes full sequences",
+    "no KV-cache-aware latency measurement",
+    "no batching or serving-runtime integration",
+    "no end-to-end wall-clock speedup claim"
+  ],
+  "decision": "Proceed to a cost-aware gamma benchmark and KV-cache-aware system prototype before requesting large-model training compute.",
+  "artifacts": {
+    "trial_results": "/content/drive/MyDrive/ma2288_nextlat/research_v3/results/tables/notebook24_h1_h8_acceptance_trials_seed42.csv",
+    "position_results": "/content/drive/MyDrive/ma2288_nextlat/research_v3/results/tables/notebook24_h1_h8_acceptance_positions_seed42.csv",
+    "summary": "/content/drive/MyDrive/ma2288_nextlat/research_v3/results/tables/notebook24_h1_h8_acceptance_summary_seed42.csv",
+    "comparison": "/content/drive/MyDrive/ma2288_nextlat/research_v3/results/tables/notebook24_h1_h8_acceptance_comparison_seed42.csv",
+    "bootstrap": "/content/drive/MyDrive/ma2288_nextlat/research_v3/results/tables/notebook24_h1_h8_acceptance_cluster_bootstrap_seed42.csv",
+    "decision_table": "/content/drive/MyDrive/ma2288_nextlat/research_v3/results/tables/notebook24_acceptance_decision_seed42.csv",
+    "figure_png": "/content/drive/MyDrive/ma2288_nextlat/research_v3/results/figures/notebook24_h1_h8_acceptance_transfer_seed42.png",
+    "figure_pdf": "/content/drive/MyDrive/ma2288_nextlat/research_v3/results/figures/notebook24_h1_h8_acceptance_transfer_seed42.pdf"
+  }
+}
