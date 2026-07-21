@@ -1,0 +1,29 @@
+{
+  "dataset": "Salesforce/wikitext",
+  "dataset_config": "wikitext-103-raw-v1",
+  "split": "test",
+  "dataset_fingerprint": "c30409b5a24d230f",
+  "number_of_source_documents": 61,
+  "number_of_chunks": 474,
+  "block_size": 256,
+  "chunks_per_document_cap": 8,
+  "probe_horizons": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32
+  ],
+  "batch_size": 16,
+  "processed_batches": 30,
+  "processed_chunks": 474,
+  "elapsed_seconds": 1.3691103420001127,
+  "peak_allocated_gpu_memory_gb": 0.17940568923950195,
+  "teacher_token_conditioned": true,
+  "long_context_evaluation": false,
+  "tokenizer_characters_per_token": 2.071381424675618,
+  "official_nextlat_commit": "3770be6009cea2b3c455a9ce7f2ca88b504bb955",
+  "h1_checkpoint": "/content/drive/MyDrive/ma2288_nextlat/research_v3/checkpoints/nextlat_pilot_5000_seed42/NextLat_Scaled_5000Step_Seed42-seed42/ckpt_iter_5000_2.0028.pt",
+  "h8_checkpoint": "/content/drive/MyDrive/ma2288_nextlat/research_v3/checkpoints/nextlat_h8_pilot_5000_seed42/NextLat_H8_5000Step_Seed42-seed42/ckpt_iter_5000_2.3431.pt"
+}

@@ -1,0 +1,150 @@
+{
+  "notebook": "23_ood_longform_evaluation.ipynb",
+  "experiment_name": "OOD evaluation on text sampled from long-form source documents",
+  "research_question": "Does the H1/H8 training-horizon crossover observed on TinyStories transfer to WikiText-103 test text?",
+  "official_nextlat_commit": "3770be6009cea2b3c455a9ce7f2ca88b504bb955",
+  "training_seed": 42,
+  "models": {
+    "h1_checkpoint": "/content/drive/MyDrive/ma2288_nextlat/research_v3/checkpoints/nextlat_pilot_5000_seed42/NextLat_Scaled_5000Step_Seed42-seed42/ckpt_iter_5000_2.0028.pt",
+    "h8_checkpoint": "/content/drive/MyDrive/ma2288_nextlat/research_v3/checkpoints/nextlat_h8_pilot_5000_seed42/NextLat_H8_5000Step_Seed42-seed42/ckpt_iter_5000_2.3431.pt",
+    "training_steps_each": 5000,
+    "training_tokens_each": 81920000,
+    "training_domain": "TinyStories",
+    "training_horizons": [
+      1,
+      8
+    ]
+  },
+  "ood_dataset": {
+    "name": "Salesforce/wikitext",
+    "configuration": "wikitext-103-raw-v1",
+    "split": "test",
+    "fingerprint": "c30409b5a24d230f",
+    "source_documents_detected": 62,
+    "source_documents_used": 61,
+    "chunks": 474,
+    "chunk_length": 256,
+    "chunks_per_document_cap": 8,
+    "selection": "evenly spaced non-overlapping chunks within each document",
+    "tokenizer": "official TinyStories tokenizer",
+    "tokenizer_vocab_size": 1000,
+    "audit_characters_per_token": 2.071381424675618,
+    "unknown_token_fraction": 0.0
+  },
+  "evaluation": {
+    "deployment_horizons": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "teacher_token_conditioned": true,
+    "long_context_evaluation": false,
+    "description": "The samples come from long-form documents, but model context length remains 256 tokens.",
+    "metrics": [
+      "normalized_l2",
+      "output_kl",
+      "teacher_top1_agreement"
+    ]
+  },
+  "main_ood_results": {
+    "horizon_1": {
+      "h8_output_kl_reduction_percent": -28.54820517397195,
+      "h8_top1_gain_points": -5.260972125319779,
+      "output_kl_improvement_ci": [
+        -0.21855244899138077,
+        -0.20261354459235903
+      ],
+      "top1_improvement_ci": [
+        -0.05665095901788502,
+        -0.048703930595675946
+      ]
+    },
+    "horizon_2": {
+      "h8_output_kl_reduction_percent": 6.326110926838311,
+      "h8_top1_gain_points": 3.506445856473378,
+      "output_kl_improvement_ci": [
+        0.05812536644764611,
+        0.07659450978284976
+      ],
+      "top1_improvement_ci": [
+        0.03125607340184392,
+        0.03853754801752015
+      ]
+    },
+    "horizon_8": {
+      "h8_output_kl_reduction_percent": 22.36275000335776,
+      "h8_top1_gain_points": 9.194724884265192,
+      "output_kl_improvement_ci": [
+        0.30631366071642424,
+        0.32647414543039976
+      ]
+    },
+    "horizon_32": {
+      "h8_output_kl_reduction_percent": 60.76653244349979,
+      "h8_top1_gain_points": 22.216230534900003,
+      "output_kl_improvement_ci": [
+        1.7923727896919504,
+        1.9507764564643872
+      ]
+    }
+  },
+  "cross_domain_results": {
+    "tiny_stories_h8_output_kl_reduction_percent": {
+      "1": -88.92538786695206,
+      "2": 22.860237131083416,
+      "4": 44.959096577394725,
+      "8": 51.19907360743142,
+      "16": 56.1192702213833,
+      "32": 66.2831497410002
+    },
+    "wikitext_h8_output_kl_reduction_percent": {
+      "1": -28.54820517397195,
+      "2": 6.326110926838311,
+      "4": 15.30567313085451,
+      "8": 22.36275000335776,
+      "16": 33.68117731162761,
+      "32": 60.76653244349979
+    },
+    "crossover": "H1 is functionally better at deployment horizon 1; H8 is functionally better from horizon 2 through 32 in both domains.",
+    "ood_effect": "The qualitative crossover transfers, but the medium-horizon H8 advantage is attenuated on WikiText."
+  },
+  "statistics": {
+    "bootstrap_type": "paired document-cluster bootstrap",
+    "cluster_unit": "source document",
+    "equal_document_weighting": true,
+    "clusters": 61,
+    "repetitions": 5000,
+    "confidence_level": 0.95,
+    "multiple_comparison_correction": null,
+    "scope": "Evaluation-document variation only; does not include training-seed uncertainty."
+  },
+  "scientific_conclusion": "The training-horizon crossover transfers from TinyStories validation to WikiText-103 test text. H8 sacrifices one-step decoder fidelity but provides increasingly strong long-horizon functional stability. The medium-horizon advantage is smaller under OOD and tokenizer shift.",
+  "industrial_interpretation": "Cross-domain rollout stability strengthens the case for testing H8 as a speculative drafter, but this notebook does not measure acceptance, KV-cache traffic, latency, throughput, or speedup.",
+  "limitations": [
+    "single training seed",
+    "one small model scale",
+    "one OOD dataset",
+    "TinyStories tokenizer causes strong WikiText subword fragmentation",
+    "teacher-token-conditioned rollout",
+    "256-token context only",
+    "no autonomous acceptance measurement",
+    "no hardware-performance claim"
+  ],
+  "decision": "Proceed to matched H1/H8 acceptance-transfer evaluation before requesting larger compute.",
+  "artifacts": {
+    "ood_protocol": "/content/drive/MyDrive/ma2288_nextlat/research_v3/results/metadata/wikitext103_test_ood_protocol_seed42.json",
+    "ood_chunk_metadata": "/content/drive/MyDrive/ma2288_nextlat/research_v3/results/tables/wikitext103_test_ood_chunk_metadata_seed42.csv",
+    "full_results": "/content/drive/MyDrive/ma2288_nextlat/research_v3/results/tables/wikitext103_test_full_h1_vs_h8_recursive_seed42.csv",
+    "full_comparison": "/content/drive/MyDrive/ma2288_nextlat/research_v3/results/tables/wikitext103_test_h8_improvement_over_h1_seed42.csv",
+    "chunk_paired_statistics": "/content/drive/MyDrive/ma2288_nextlat/research_v3/results/tables/wikitext103_test_chunk_paired_statistics_seed42.csv",
+    "document_paired_statistics": "/content/drive/MyDrive/ma2288_nextlat/research_v3/results/tables/wikitext103_test_document_paired_statistics_seed42.csv",
+    "cluster_bootstrap": "/content/drive/MyDrive/ma2288_nextlat/research_v3/results/tables/wikitext103_test_document_cluster_bootstrap_seed42.csv",
+    "cross_domain_absolute": "/content/drive/MyDrive/ma2288_nextlat/research_v3/results/tables/tinystories_vs_wikitext_h1_h8_absolute_seed42.csv",
+    "cross_domain_shift": "/content/drive/MyDrive/ma2288_nextlat/research_v3/results/tables/tinystories_vs_wikitext_domain_shift_seed42.csv",
+    "figure_png": "/content/drive/MyDrive/ma2288_nextlat/research_v3/results/figures/tinystories_vs_wikitext_h1_h8_crossover_seed42.png",
+    "figure_pdf": "/content/drive/MyDrive/ma2288_nextlat/research_v3/results/figures/tinystories_vs_wikitext_h1_h8_crossover_seed42.pdf"
+  }
+}
