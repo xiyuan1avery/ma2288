@@ -1,4 +1,4 @@
-# MA2288 Research V2: Lossless Latent Self-Speculative Decoding
+# MA2288 Research: Latent Prediction and Lossless Self-Speculative Decoding
 
 This repository contains the experiments for an MA2288 research project on
 next-latent prediction and self-speculative decoding. The project begins with a
@@ -71,10 +71,18 @@ notebooks/
   18_fresh_acceptance_benchmark.ipynb
   19_acceptance_objectives.ipynb
   20_lossless_self_speculative_decoding.ipynb
+  21_faithful_nextlat_reproduction.ipynb
+  22_train_multihorizon_nextlat.ipynb
+  23_ood_longform_evaluation.ipynb
 
 results/
   figures/
   tables/
+
+results_v3/
+  figures/
+  tables/
+  metadata/
 
 checkpoints/
   one_step_transition_seed42.pt
@@ -545,7 +553,40 @@ This is a single-seed, small-model validation result on TinyStories.
 The dataset provides no independent test split in the official data
 module. The rollout is conditioned on true future token embeddings,
 and no end-to-end speculative decoding speedup is claimed.
-"""
+
+### OOD evaluation on long-form source text
+
+Notebook 23 evaluates whether the H1-to-H8 training-horizon crossover transfers
+from TinyStories validation to WikiText-103 test text.
+
+The evaluation uses 474 non-overlapping 256-token chunks sampled evenly from
+61 source documents. At most eight chunks are selected from each document to
+prevent a small number of long articles from dominating the result. H1 and H8
+are evaluated on exactly the same chunks.
+
+The crossover transfers across domains:
+
+- At deployment horizon 1, H8 increases output KL by 28.55% and reduces
+  teacher top-1 agreement by 5.26 percentage points.
+- At horizon 2, the functional comparison reverses in favor of H8.
+- At horizon 8, H8 reduces output KL by 22.36% and improves top-1 agreement
+  by 9.19 percentage points.
+- At horizon 32, H8 reduces output KL by 60.77% and improves top-1 agreement
+  by 22.22 percentage points.
+- A 5,000-repetition paired document-cluster bootstrap places the horizon-1
+  functional differences below zero and all horizon-2-to-32 differences above
+  zero.
+
+The qualitative training-horizon crossover therefore transfers to WikiText,
+although the medium-horizon H8 advantage is attenuated under domain and
+tokenizer shift.
+
+This is an OOD evaluation on 256-token chunks sampled within long-form source
+documents. It is not a longer-context experiment. The rollout also uses true
+future-token embeddings and does not measure autonomous speculative acceptance,
+KV-cache traffic, latency, throughput, or speedup.
+
+![TinyStories versus WikiText H1/H8 crossover](results_v3/figures/tinystories_vs_wikitext_h1_h8_crossover_seed42.png)
 
 ## Reference
 
