@@ -1,0 +1,31 @@
+domain,gamma,metric,display_name,positive_favors,num_clusters,point_estimate,bootstrap_standard_error,ci_lower,ci_upper,bootstrap_probability_positive
+TinyStories validation,2,accepted_prefix_improvement,Mean accepted prefix: H8 minus H1,H8,128,-0.0786171185585248,0.008097317140773132,-0.0944936679531406,-0.06250758762721655,0.0
+TinyStories validation,2,accepted_beyond_first_improvement,Accepted beyond first: H8 minus H1,H8,128,-0.0775389649413087,0.008055889328482902,-0.09269152234484267,-0.06105688744848902,0.0
+TinyStories validation,2,acceptance_rate_improvement,Position-2+ acceptance: H8 minus H1,H8,128,-0.07806435101356976,0.00791858247502694,-0.09342463363459456,-0.06230724435070138,0.0
+TinyStories validation,2,emitted_tokens_improvement,Emitted tokens/round: H8 minus H1,H8,128,-0.07534236596736596,0.008852617800975657,-0.09221562291874791,-0.05744864510489509,0.0
+TinyStories validation,2,verification_round_reduction,Verification rounds/100 tokens: H1 minus H8,H8,128,-1.07421875,0.12480317909144413,-1.324462890625,-0.830078125,0.0
+TinyStories validation,4,accepted_prefix_improvement,Mean accepted prefix: H8 minus H1,H8,128,-0.05854230405011654,0.02370182418713702,-0.1051231316697625,-0.012128498806965593,0.0066
+TinyStories validation,4,accepted_beyond_first_improvement,Accepted beyond first: H8 minus H1,H8,128,-0.05921819608343046,0.02345314647266326,-0.10492734790708425,-0.012807168553018201,0.0054
+TinyStories validation,4,acceptance_rate_improvement,Position-2+ acceptance: H8 minus H1,H8,128,-0.018592346654855665,0.008080627864497768,-0.034055827415265014,-0.0025792172543709197,0.0088
+TinyStories validation,4,emitted_tokens_improvement,Emitted tokens/round: H8 minus H1,H8,128,-0.05825147075147073,0.022883166175978596,-0.103735648032523,-0.014112293956043947,0.0054
+TinyStories validation,4,verification_round_reduction,Verification rounds/100 tokens: H1 minus H8,H8,128,-0.555419921875,0.19507727427185872,-0.921783447265625,-0.1708984375,0.0016
+TinyStories validation,8,accepted_prefix_improvement,Mean accepted prefix: H8 minus H1,H8,128,0.16087866668921358,0.04605280624733809,0.07022773924751465,0.2500398674947014,0.9998
+TinyStories validation,8,accepted_beyond_first_improvement,Accepted beyond first: H8 minus H1,H8,128,0.16047204748376626,0.04463092888497985,0.07393383471996753,0.24891525290573144,0.9998
+TinyStories validation,8,acceptance_rate_improvement,Position-2+ acceptance: H8 minus H1,H8,128,0.0249179334584272,0.0072253175600813435,0.010888703580597424,0.03924344944271508,0.9996
+TinyStories validation,8,emitted_tokens_improvement,Emitted tokens/round: H8 minus H1,H8,128,0.15859851953601953,0.04552766904830502,0.06804694871101122,0.24735086961649455,1.0
+TinyStories validation,8,verification_round_reduction,Verification rounds/100 tokens: H1 minus H8,H8,128,0.823974609375,0.2908185849946355,0.244140625,1.385498046875,0.9956
+WikiText-103 test OOD,2,accepted_prefix_improvement,Mean accepted prefix: H8 minus H1,H8,60,-0.05721929690679691,0.008532511139782801,-0.07346026571807822,-0.04020083388833389,0.0
+WikiText-103 test OOD,2,accepted_beyond_first_improvement,Accepted beyond first: H8 minus H1,H8,60,-0.05806903744403744,0.008425748165851205,-0.07432225413475414,-0.041377871549746544,0.0
+WikiText-103 test OOD,2,acceptance_rate_improvement,Position-2+ acceptance: H8 minus H1,H8,60,-0.06363035113035112,0.008394421858454848,-0.08013734240296741,-0.04710961347680098,0.0
+WikiText-103 test OOD,2,emitted_tokens_improvement,Emitted tokens/round: H8 minus H1,H8,60,-0.057232397232397224,0.009046751268402247,-0.0748735986235986,-0.03923407148407149,0.0
+WikiText-103 test OOD,2,verification_round_reduction,Verification rounds/100 tokens: H1 minus H8,H8,60,-0.8593750000000001,0.13353715357384568,-1.130642361111111,-0.5902777777777779,0.0
+WikiText-103 test OOD,4,accepted_prefix_improvement,Mean accepted prefix: H8 minus H1,H8,60,-0.052135742344075656,0.023973259397611982,-0.09836535349295764,-0.004817527380027439,0.015
+WikiText-103 test OOD,4,accepted_beyond_first_improvement,Accepted beyond first: H8 minus H1,H8,60,-0.05061580394913729,0.02366313091042766,-0.09716678889204931,-0.0051498942319255095,0.0158
+WikiText-103 test OOD,4,acceptance_rate_improvement,Position-2+ acceptance: H8 minus H1,H8,60,-0.017906142565237534,0.007908569924134372,-0.03357660881210355,-0.0024451053329165385,0.0102
+WikiText-103 test OOD,4,emitted_tokens_improvement,Emitted tokens/round: H8 minus H1,H8,60,-0.053952467285800616,0.024168856473372188,-0.10108954933954935,-0.006513040971374363,0.012
+WikiText-103 test OOD,4,verification_round_reduction,Verification rounds/100 tokens: H1 minus H8,H8,60,-0.5859375,0.2183431253249419,-1.0026041666666667,-0.15625000000000003,0.0052
+WikiText-103 test OOD,8,accepted_prefix_improvement,Mean accepted prefix: H8 minus H1,H8,60,0.08195975706392374,0.047629562254368166,-0.012455415148123494,0.1759981724005161,0.957
+WikiText-103 test OOD,8,accepted_beyond_first_improvement,Accepted beyond first: H8 minus H1,H8,60,0.08354944823694825,0.048337131193984015,-0.010664460250397741,0.18040564002933793,0.9602
+WikiText-103 test OOD,8,acceptance_rate_improvement,Position-2+ acceptance: H8 minus H1,H8,60,0.013428023680545508,0.007419545022898004,-0.0011591278499176166,0.027892242384334597,0.9638
+WikiText-103 test OOD,8,emitted_tokens_improvement,Emitted tokens/round: H8 minus H1,H8,60,0.08444962444962444,0.046341951868265854,-0.004608220483220488,0.17551148542815195,0.9666
+WikiText-103 test OOD,8,verification_round_reduction,Verification rounds/100 tokens: H1 minus H8,H8,60,0.36892361111111105,0.31148858455545625,-0.2452799479166666,0.9678819444444445,0.8796
