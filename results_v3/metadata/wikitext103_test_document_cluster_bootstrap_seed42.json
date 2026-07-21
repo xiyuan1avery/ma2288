@@ -1,0 +1,25 @@
+{
+  "dataset": "Salesforce/wikitext",
+  "dataset_config": "wikitext-103-raw-v1",
+  "split": "test",
+  "evaluation_unit": "256-token chunk",
+  "bootstrap_cluster_unit": "source document",
+  "document_weighting": "equal document weight",
+  "number_of_documents": 61,
+  "number_of_chunks": 474,
+  "chunks_per_document_cap": 8,
+  "bootstrap_repetitions": 5000,
+  "bootstrap_seed": 42,
+  "confidence_level": 0.95,
+  "probe_horizons": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32
+  ],
+  "elapsed_seconds": 0.048595904999956474,
+  "multiple_comparison_correction": null,
+  "interpretation": "Confidence intervals quantify variation across the 61 WikiText source documents. They do not quantify training-seed uncertainty."
+}

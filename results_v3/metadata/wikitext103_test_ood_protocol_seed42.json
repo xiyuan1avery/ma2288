@@ -1,0 +1,18 @@
+{
+  "dataset_name": "Salesforce/wikitext",
+  "dataset_config": "wikitext-103-raw-v1",
+  "split": "test",
+  "dataset_fingerprint": "c30409b5a24d230f",
+  "official_nextlat_commit": "3770be6009cea2b3c455a9ce7f2ca88b504bb955",
+  "tokenizer_vocab_size": 1000,
+  "block_size": 256,
+  "training_domain": "TinyStories",
+  "evaluation_domain": "WikiText-103 test",
+  "source_documents_detected": 62,
+  "source_documents_used": 61,
+  "total_chunks": 474,
+  "chunks_per_document_cap": 8,
+  "selection_method": "evenly_spaced_non_overlapping",
+  "long_context_claim": false,
+  "description": "OOD 256-token chunks sampled within long-form source documents; not a longer-context evaluation."
+}
